@@ -27,6 +27,7 @@ func handleRequest() {
 	r.HandleFunc("/products", GetProducts).Methods("GET")
 	r.HandleFunc("/product/{id}", GetProductById).Methods("GET")
 	r.HandleFunc("/product", CreateProduct).Methods("POST")
+	r.HandleFunc("/product/{id}", DeleteProduct).Methods("DELETE")
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
 
@@ -46,9 +47,19 @@ func GetProductById(w http.ResponseWriter, req *http.Request) {
 }
 
 func CreateProduct(w http.ResponseWriter, req *http.Request) {
-	// params := mux.Vars(req)
 	var prod Product
 	_ = json.NewDecoder(req.Body).Decode(&prod)
 	products = append(products, prod)
 	json.NewEncoder(w).Encode(&products)
+}
+
+func DeleteProduct(w http.ResponseWriter, req *http.Request) {
+	params := mux.Vars(req)
+	for index, item := range products {
+		if item.ID == params["id"] {
+			products = append(products[:index], products[index+1:]...)
+			break
+		}
+	}
+	json.NewEncoder(w).Encode(products)
 }
