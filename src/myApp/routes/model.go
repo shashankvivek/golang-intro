@@ -18,12 +18,3 @@ type Product struct {
 }
 
 var products []Product
-
-var routeList = AppRoutes{
-	AppRoute{
-		"GetProducts",
-		"/products",
-		GetProducts,
-		"GET",
-	},
-}
