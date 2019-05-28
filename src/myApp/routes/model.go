@@ -10,11 +10,3 @@ type AppRoute struct {
 }
 
 type AppRoutes []AppRoute
-
-type Product struct {
-	ID       string `json:"id"`
-	Name     string `json:"name"`
-	Qunatity int    `json:"qty,omitempty"`
-}
-
-var products []Product

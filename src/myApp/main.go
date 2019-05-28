@@ -14,5 +14,6 @@ func main() {
 func handleRequest() {
 	r := app.NewRouter()
 	// run using : sudo -E go run main.go
-	log.Fatal(http.ListenAndServeTLS(":443", "server.crt", "server.key", r))
+	// log.Fatal(http.ListenAndServeTLS(":443", "server.crt", "server.key", r))
+	log.Fatal(http.ListenAndServe(":8080", r))
 }
